@@ -2,6 +2,7 @@ package raven.login;
 
 import com.formdev.flatlaf.FlatClientProperties;
 import net.miginfocom.swing.MigLayout;
+import raven.manager.FormsManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,7 +27,7 @@ public class Login extends JPanel {
 
         txtPassword.putClientProperty(FlatClientProperties.STYLE, "" +
                 "showRevealButton:true");
-        cmdLogin.putClientProperty(FlatClientProperties.STYLE,"" +
+        cmdLogin.putClientProperty(FlatClientProperties.STYLE, "" +
                 "[light]background:darken(@background,10%);" +
                 "[dark]background:lighten(@background,10%);" +
                 "borderWidth:0;" +
@@ -66,8 +67,7 @@ public class Login extends JPanel {
         cmdRegister.setContentAreaFilled(false);
         cmdRegister.setCursor(new Cursor(Cursor.HAND_CURSOR));
         cmdRegister.addActionListener(e -> {
-            System.out.println("Go Signup form");
-            //  Next update
+            FormsManager.getInstance().showForm(new Register());
         });
         JLabel label = new JLabel("Don't have an account ?");
         label.putClientProperty(FlatClientProperties.STYLE, "" +
