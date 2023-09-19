@@ -2,6 +2,7 @@ package raven.login;
 
 import com.formdev.flatlaf.FlatClientProperties;
 import net.miginfocom.swing.MigLayout;
+import raven.component.PasswordStrengthStatus;
 import raven.manager.FormsManager;
 
 import javax.swing.*;
@@ -20,6 +21,7 @@ public class Register extends JPanel {
         txtPassword = new JPasswordField();
         txtConfirmPassword = new JPasswordField();
         cmdRegister = new JButton("Sign Up");
+        passwordStrengthStatus = new PasswordStrengthStatus();
 
         JPanel panel = new JPanel(new MigLayout("wrap,fillx,insets 35 45 30 45", "[fill,360]"));
         panel.putClientProperty(FlatClientProperties.STYLE, "" +
@@ -52,6 +54,8 @@ public class Register extends JPanel {
                 "[light]foreground:lighten(@foreground,30%);" +
                 "[dark]foreground:darken(@foreground,30%)");
 
+        passwordStrengthStatus.initPasswordField(txtPassword);
+
         panel.add(lbTitle);
         panel.add(description);
         panel.add(new JLabel("Full Name"), "gapy 10");
@@ -64,7 +68,8 @@ public class Register extends JPanel {
         panel.add(txtUsername);
         panel.add(new JLabel("Password"), "gapy 8");
         panel.add(txtPassword);
-        panel.add(new JLabel("Confirm Password"), "gapy 8");
+        panel.add(passwordStrengthStatus,"gapy 0");
+        panel.add(new JLabel("Confirm Password"), "gapy 0");
         panel.add(txtConfirmPassword);
         panel.add(cmdRegister, "gapy 20");
         panel.add(createLoginLabel(), "gapy 10");
@@ -116,4 +121,5 @@ public class Register extends JPanel {
     private JPasswordField txtConfirmPassword;
     private ButtonGroup groupGender;
     private JButton cmdRegister;
+    private PasswordStrengthStatus passwordStrengthStatus;
 }
