@@ -4,6 +4,7 @@ import com.formdev.flatlaf.FlatClientProperties;
 import net.miginfocom.swing.MigLayout;
 import raven.component.PasswordStrengthStatus;
 import raven.manager.FormsManager;
+import raven.toast.Notifications;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,6 +22,14 @@ public class Register extends JPanel {
         txtPassword = new JPasswordField();
         txtConfirmPassword = new JPasswordField();
         cmdRegister = new JButton("Sign Up");
+
+        cmdRegister.addActionListener(e -> {
+            if (isMatchPassword()) {
+                //  Do something here
+            } else {
+                Notifications.getInstance().show(Notifications.Type.ERROR, "Passwords don't match. Try again!");
+            }
+        });
         passwordStrengthStatus = new PasswordStrengthStatus();
 
         JPanel panel = new JPanel(new MigLayout("wrap,fillx,insets 35 45 30 45", "[fill,360]"));
@@ -68,7 +77,7 @@ public class Register extends JPanel {
         panel.add(txtUsername);
         panel.add(new JLabel("Password"), "gapy 8");
         panel.add(txtPassword);
-        panel.add(passwordStrengthStatus,"gapy 0");
+        panel.add(passwordStrengthStatus, "gapy 0");
         panel.add(new JLabel("Confirm Password"), "gapy 0");
         panel.add(txtConfirmPassword);
         panel.add(cmdRegister, "gapy 20");
@@ -110,6 +119,12 @@ public class Register extends JPanel {
         panel.add(label);
         panel.add(cmdLogin);
         return panel;
+    }
+
+    public boolean isMatchPassword() {
+        String password = String.valueOf(txtPassword.getPassword());
+        String confirmPassword = String.valueOf(txtConfirmPassword.getPassword());
+        return password.equals(confirmPassword);
     }
 
     private JTextField txtFirstName;

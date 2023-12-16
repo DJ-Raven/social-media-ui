@@ -5,6 +5,7 @@ import com.formdev.flatlaf.fonts.roboto.FlatRobotoFont;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import raven.login.Login;
 import raven.manager.FormsManager;
+import raven.toast.Notifications;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,6 +22,7 @@ public class Application extends JFrame {
         setSize(new Dimension(1200, 700));
         setLocationRelativeTo(null);
         setContentPane(new Login());
+        Notifications.getInstance().setJFrame(this);
         FormsManager.getInstance().initApplication(this);
     }
 
